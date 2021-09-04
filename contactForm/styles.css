@@ -1,0 +1,344 @@
+:root {
+    --form-bg: rgba(0, 1, 72, 0.95);
+    --gradient-start: rgb(239, 248, 255, 0.9);
+    --gradient-end: rgb(201, 203, 255, 0.9);
+    --form-bg: #E4FBFF;
+    --light: #1CC5DC;
+    --text: #233E8B;
+    --error: #FF6B6B;
+
+}
+
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+    font-family: 'Urbanist', sans-serif;
+}
+
+.background {
+    color: var(--text);
+    height: 100vh;
+    background-image: linear-gradient(to right bottom, var(--gradient-start), var(--gradient-end)), url(images/bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+
+}
+
+h1 {
+    font-size: 4rem;
+    color: var(--text);
+    margin: 4rem auto 8rem;
+}
+
+.container {
+    position: relative;
+    background-color: var(--form-bg);
+    height: 60%;
+    width: 25%;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow:
+    0 0.8px 1.1px rgba(0, 0, 0, 0.206),
+    0 2.7px 3.8px rgba(0, 0, 0, 0.304),
+    0 12px 17px rgba(0, 0, 0, 0.51);
+  
+
+}
+
+
+
+form {
+    position: relative;
+    height: 100%;
+    width: 80%;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-content: space-around;
+    gap: 1rem;
+}
+
+
+
+.section {
+    position: relative;
+    height: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+
+.section label {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0%;
+    bottom: 0%;
+    border-bottom: 1px solid var(--light);
+    pointer-events: none;
+    font-weight: bold;
+
+}
+
+.section input {
+    background-color: var(--form-bg);
+    font-family: inherit;
+    font-size: 1.7rem;
+    color: var(--text);
+    padding-top: 2rem;
+    padding-left: .2rem;
+    height: 100%;
+    width: 100%;
+    border: none;
+    outline: none;
+
+}
+
+.section label::after {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 101%;
+    border-bottom: .4rem solid var(--text);
+    left: -.1rem;
+    bottom: -.3rem;
+    transform: translateX(-100%);
+    pointer-events: none;
+    transition: transform .3s ease;
+}
+
+.label-content {
+    color: var(--light);
+    position: absolute;
+    bottom: .3rem;
+    left: .2rem;
+    transition: transform 0.3s ease;
+}
+
+.section input:focus + label .label-content,
+.section input:valid + label .label-content {
+    transform: translateY(-120%);
+    font-size: 1.8rem;
+    color: var(--text);
+}
+
+.section input:focus + label::after,
+.section input:valid + label::after {
+    transform: translateX(0%);
+}
+
+form p {
+    margin: .2rem 0 -2rem;
+    justify-self: center;
+    font-weight: bold;
+}
+
+.form-message {
+    height: 15rem;
+}
+
+textarea {
+    border: none;
+    background-color: var(--form-bg);
+    height: 50%;
+    resize: none;
+    outline: none;
+    font-family: inherit;
+    font-size: 1.7rem;
+    margin-top: 5rem;
+    color: var(--text);
+    padding-top: 7rem;
+    padding-left: .2rem;
+    resize: none;
+    overflow: hidden;
+
+}
+
+.section textarea:focus + label .label-content,
+.section textarea:valid + label .label-content {
+    transform: translateY(-450%);
+    font-size: 1.8rem;
+    color: var(--text);
+}
+.section textarea:focus + label::after,
+.section textarea:valid + label::after {
+    transform: translateX(0%);
+
+}
+#password {
+    font-family: caption;
+}
+
+.form-password label::after {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 101%;
+    border-bottom: .2rem solid var(--text);
+    left: -.1rem;
+    bottom: -.2rem;
+    transform: translateX(-100%);
+    pointer-events: none;
+    transition: transform .3s ease;
+}
+
+button {
+    background-color: var(--light);
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: bold;
+    color: var(--text);
+    width:fit-content;
+    justify-self: center;
+    position: relative;
+    padding: 1rem;
+    border: none;
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+}
+
+button::after, button::before {
+    content: "";
+    position: absolute;
+    opacity: .3;
+    background: var(--light);
+    border-radius: inherit;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    bottom: 0;
+    transition: transform .3s ease;
+    z-index: -1;
+}
+
+button:hover {
+    transform: translate(-.8rem, .8rem);
+}
+button:hover::after {
+    transform: translate(.4rem, -.4rem);
+}
+button:hover::before {
+    transform: translate(.8rem, -.8rem);
+}
+
+.form-gender {
+    display: flex;
+    font-weight: bold;
+    flex-direction: row;
+    height: 5rem;
+    width: 30%;
+    align-items: center;
+    justify-content: space-between;
+    justify-self: center;
+    margin-bottom: -2rem;
+}
+
+.form-gender label {
+    width: fit-content;
+    margin-right: .5rem;
+}
+
+.form-gender input {
+    margin-right: 1rem;
+}
+
+
+.input-values {
+    justify-self: center;
+    align-self: center;
+    border : 2px solid var(--text);
+    border-radius: 15px;
+    padding: 2rem;
+    grid-template-columns: 1fr;
+    display: none;
+}
+
+.header {
+    justify-self: center;
+    width: 80%;
+    font-size: 2.5rem;
+    text-align: center;
+}
+.value {
+    font-weight: bold;
+}
+
+.info {
+    list-style: none;
+    margin: .5rem 0;
+}
+
+
+
+.sk-chase {
+    width: 5rem;
+    height: 5rem;
+    position: relative;
+    animation: sk-chase 2s infinite linear both;
+    display: none;
+    align-self: center;
+  }
+  
+  .sk-chase-dot {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0; 
+    animation: sk-chase-dot 2.0s infinite ease-in-out both; 
+  }
+  
+  .sk-chase-dot:before {
+    content: '';
+    display: block;
+    width: 25%;
+    height: 25%;
+    background-color: var(--text);
+    border-radius: 100%;
+    animation: sk-chase-dot-before 2.0s infinite ease-in-out both; 
+  }
+  
+  .sk-chase-dot:nth-child(1) { animation-delay: -1.1s; }
+  .sk-chase-dot:nth-child(2) { animation-delay: -1.0s; }
+  .sk-chase-dot:nth-child(3) { animation-delay: -0.9s; }
+  .sk-chase-dot:nth-child(4) { animation-delay: -0.8s; }
+  .sk-chase-dot:nth-child(5) { animation-delay: -0.7s; }
+  .sk-chase-dot:nth-child(6) { animation-delay: -0.6s; }
+  .sk-chase-dot:nth-child(1):before { animation-delay: -1.1s; }
+  .sk-chase-dot:nth-child(2):before { animation-delay: -1.0s; }
+  .sk-chase-dot:nth-child(3):before { animation-delay: -0.9s; }
+  .sk-chase-dot:nth-child(4):before { animation-delay: -0.8s; }
+  .sk-chase-dot:nth-child(5):before { animation-delay: -0.7s; }
+  .sk-chase-dot:nth-child(6):before { animation-delay: -0.6s; }
+  
+  @keyframes sk-chase {
+    100% { transform: rotate(360deg); } 
+  }
+  
+  @keyframes sk-chase-dot {
+    80%, 100% { transform: rotate(360deg); } 
+  }
+  
+  @keyframes sk-chase-dot-before {
+    50% {
+      transform: scale(0.4); 
+    } 100%, 0% {
+      transform: scale(1.0); 
+    } 
+  }

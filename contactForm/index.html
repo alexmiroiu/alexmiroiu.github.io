@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <title>Alex's Contact form</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+</head>
+
+<body>
+    <div class="background">
+        <h1>This is a dummy user creation form</h1>
+        <div class="container">
+            <form action="POST">
+                <p>Let's create a dummy account </p>
+                <div class="form-gender ">
+                    <label for="gender">Mr</label>
+                    <input type="radio" name="gender" value="male" checked>
+                    <label for="gender">Mrs</label>
+                    <input type="radio" name="gender" value="female">
+                </div>
+                <div class="form-fname section">
+                    <input type="text" id="fname" name="fname" class="zzz" required>
+                    <label for="fname">
+                        <span class="label-content">Your first name</span>
+                    </label>
+                </div>
+                <div class="form-lname section">
+                    <input type="text" name="lname" id="lname" required>
+                    <label for="lname">
+                        <span class="label-content">Your last name</span>
+                    </label>
+                </div>
+                <div class="form-email section">
+                    <input type="text" name="email" id="email" required>
+                    <label for="email">
+                        <span class="label-content">Email</span>
+                    </label>
+                </div>
+                <div class="form-username section">
+                    <input type="text" name="username" id="username" required>
+                    <label for="username">
+                        <span class="label-content">Username</span>
+                    </label>
+                    
+                </div>
+                <div class="form-password section">
+                    <input type="password" name="password" id="password" required>
+                    <label for="phone">
+                        <span class="label-content">Password</span>
+                    </label>
+                </div>
+                <button>Submit</button>
+            </form>
+            <div class="sk-chase">
+                <div class="sk-chase-dot"></div>
+                <div class="sk-chase-dot"></div>
+                <div class="sk-chase-dot"></div>
+                <div class="sk-chase-dot"></div>
+                <div class="sk-chase-dot"></div>
+                <div class="sk-chase-dot"></div>
+            </div>
+            <ul class="input-values">
+                <li class="info header">The following info was sent to the server:</li>
+                <li class="info">Gender: <span class="value" id="gender-val"></span></li>
+                <li class="info">First Name: <span class="value" id="fname-val"></span></li>
+                <li class="info">Last Name: <span class="value" id="lname-val"></span></li>
+                <li class="info">Email: <span class="value" id="email-val"></span></li>
+                <li class="info">User Name: <span class="value" id="username-val"></span></li>
+                <li class="info">User Password: <span class="value" id="userpass-val"></span></li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>
