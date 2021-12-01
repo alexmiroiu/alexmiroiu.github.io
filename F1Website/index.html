@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Saira:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Saira+Stencil+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="spinner.css" />
+
+    <script src="modules/spinner.js" defer type="module"></script>
+    <script src="modules/standings.js" defer type="module"></script>
+    <script src="modules/calendar.js" defer type="module"></script>
+    <script src="app.js" defer type="module"></script>
+    <title>My F1 Website</title>
+  </head>
+  <body>
+
+    <!-- ----------------------------- template-uri pentru rezultatele ultimei curse ----------------------- -->
+    <template id="last-race-info">
+      <h1 class="lr-title">Last Race Results</h1>
+      <p class="lr-round-number">Round number: </p>
+      <p class="lr-gp-name"></p>
+      <ul class="lr-standings"></ul>
+    </template>
+    <template id="lr-driver-item">
+      <div class="lr-driver-item">
+        <div class="lr-driver-item__pos lr-pos"></div>
+        <div class="lr-driver-item__name lr-name"></div>
+        <div class="lr-driver-item__car-number lr-car-number"></div>
+        <div class="lr-driver-item__team lr-team"></div>
+        <div class="lr-driver-item__status lr-status"></div>
+        <div class="lr-driver-item__points lr-points"></div>
+      </div>
+    </template>
+    <template id="lr-header">
+      <div class="lr-header">
+        <div class="lr-header__pos lr-pos">Position</div>
+        <div class="lr-header__name lr-name">Driver Name</div>
+        <div class="lr-header__car-number lr-car-number">Car No</div>
+        <div class="lr-header__team lr-team">Team</div>
+        <div class="lr-header__status lr-status">Finished Status</div>
+        <div class="lr-header__points lr-points">Points</div>
+      </div>
+    </template>
+ <!-- --------------------------------------------------------------------------------------------------------------- -->
+    </template>
+    
+    <!-- template-uri pentru randarea clasamentului pentru piloti -->
+    <template id="driver-standings">
+      <h1 class="standings-title">Current driver standings</h1>
+      <div class="standings-info">
+        <p class="standings-season"></p>
+        <p class="standings-round"></p>
+      </div>
+      <ul class="standings-list"></ul>
+    </template>
+    <template id="driver">
+      <div class="driver-item">
+        <div class="driver-item__pos"></div>
+        <div class="driver-item__name"></div>
+        <div class="driver-item__points"></div>
+      </div>
+    </template>
+    <template id="standings-header">
+      <div class="standings-header">
+        <div class="standings-header__pos">Position</div>
+        <div class="standings-header__name">Driver Name</div>
+        <div class="standings-header__points">Points</div>
+      </div>
+    </template>
+    <!-- ////////////////////////////////////////// -->
+    <!-- template-uri pentru randarea clasamentului pentru echipe -->
+    <template id="constructors-standings">
+      <h1 class="constructors-title">Current constructors standings</h1>
+      <div class="cStandings-info">
+        <p class="cStandings-season">Current Season: </p>
+        <p class="cStandings-round">Concluded Rounds: </p>
+      </div>
+      <ul class="cStandings-list"></ul>
+    </template>
+    <template id="constructor">
+      <div class="constructor-item">
+        <div class="constructor-item__pos cPos"></div>
+        <div class="constructor-item__name cName"></div>
+        <div class="constructor-item__nationality cNationality"></div>
+        <div class="constructor-item__points cPoints"></div>
+        <div class="constructor-item__wins cWins"></div>
+      </div>
+    </template>
+    <template id="constructors-header">
+      <div class="constructors-header">
+        <div class="constructors-header__pos cPos">Position</div>
+        <div class="constructors-header__name cName">Driver Name</div>
+        <div class="constructors-header__nationality cNationality">Nationality</div>
+        <div class="constructors-header__points cPoints">Points</div>
+        <div class="constructors-header__wins cWins">Wins</div>
+      </div>
+    </template>
+    <!-- ////////////////////////////////////////////////// -->
+    <!-- template pentru spinner -->
+    <template class="loading-spinner">
+        <div class="spinner">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+        </div>
+    </template>
+    <!-- ////////////////////////////////////////////////// -->
+    <!-- template pentru Calendar -->
+    <template class="calendar">
+        <h1 class="calendar-title">2021 Race calendar</h1>
+        <div class="calendar-display">
+          <ul class="calendar-list"></ul>
+          <div class="calendar-controls">
+            <button class="btn calendar-btn-prev">Previous</button>
+            <div class="calendar-current-page">Page <span class="calendar-current-pg"></span> of <span class="calendar-total-pg"></span></div>
+            <button class="btn calendar-btn-next">Next</button>
+          </div>
+        </div>
+    </template>
+    <template class="calendar-item">
+        <div class="race-item">
+            <div class="race-round"></div>
+            <div class="race-name"></div>
+            <div class="race-country"></div>
+            <div class="race-date"></div>
+            <a href="" class="race-info">Check track info</a>
+        </div>
+    </template>
+    <template id="calendar-header">
+        <div class="calendar-header">
+          <div class="calendar-header__round">Round</div>
+          <div class="calendar-header__name">Circuit Name</div>
+          <div class="calendar-header__country">Circuit Country</div>
+          <div class="calendar-header__date">Race Date</div>
+          <div class="calendar-header__info">Race Info</div>
+        </div>
+    </template>
+    <!-- template pentru driverList -->
+    <template id="drivers-list">
+        <h1 class="drivers-list-title">Current F1 drivers</h1>
+        <p class="drivers-list-description"></p>
+        <ul class="drivers-list"></ul>
+    </template>
+    <template id="dl-driver-item">
+        <div class="dl-driver-item">
+          <img class="dl-driver-item__helmet" src="" alt="helmet">
+          <div class="dl-driver-item__name-wrapper">
+            <div class="dl-driver-item__name">
+              <p class="dl-driver-item__given-name"></p>
+              <p class="dl-driver-item__family-name"></p>
+            </div>
+            <div class="dl-driver-item__number"></div>
+          </div>
+        </div>
+    </template>
+    <template id="driver-profile">
+      <h1 class="driver-profile__title"></h1>
+      <p class="driver-profile__dob">Born: </p>
+      <p class="driver-profile__nationality">Nationality: </p>
+      <div class="driver-profile-container">
+        <img src="" alt="photo" class="driver-profile__photo">
+        <div class="driver-profile-info-wrapper">
+          <p class="driver-profile__team profile-item">Team: </p>
+          <p class="driver-profile__championships profile-item">Championships won: </p>
+          <p class="driver-profile__races profile-item">Races completed: </p>
+          <p class="driver-profile__wins profile-item">Race wins: </p>
+          <p class="driver-profile__podiums profile-item">Podiums: </p>
+          <p class="driver-profile__best profile-item">Best result: </p>
+        </div>
+      </div>
+    </template>
+    <template id="modal">
+      <div class="modal-container">
+        <div class="modal">
+          <h2 class="modal-title">Welcome to my formula 1 website</h2>
+          <p class="modal-info">Here you will find up to date standings and information</p>
+          <button class="modal-btn">Continue</button>
+        </div>
+      </div>
+    </template>
+
+    <!-- ///////////////////////////////////////////////// -->
+    <header>
+      <div id="logo">
+        <img src="images/f1logo.png" alt="" />
+      </div>
+      <nav>
+        <ul class="menu-list">
+          <div class="standings-wrapper">
+            <li class="standings-btn">Standings</li>
+            <div class="standings-dropdown-wrapper">
+              <li class="dropdown-btn standings-drivers">Drivers</li>
+              <li class="dropdown-btn standings-constructors">Constructors</li>
+            </div>
+          </div>
+          <li class="tracks-btn">Race Calendar</li>
+          <li class="search-drivers-btn">Drivers Details</li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div class="display"></div>
+    </main>
+    <footer> Made by Alex Miroiu</footer>
+  </body>
+</html>

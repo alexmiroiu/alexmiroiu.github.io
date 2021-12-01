@@ -1,0 +1,784 @@
+:root {
+  --text: #141313;
+  --gradient-top: rgba(255, 255, 255, 0.9);
+  --gradient-bottom: rgba(237, 255, 233, 0.9);
+  --border-color: #bbbbbb;
+  --light-grey: #dddddd;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Saira", sans-serif;
+}
+html {
+  font-size: 62.5%;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 1rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gradient-bottom);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--border-color);
+}
+
+body {
+  color: var(--text);
+  z-index: -2;
+  display: grid;
+  grid-template-columns: 1fr 80% 1fr;
+  grid-template-rows: 5rem 90vh calc(100vh - (90vh + 5rem));
+  background: url(images/bg.jpg) no-repeat center center fixed;
+  background-size: cover;
+  width: 100%;
+  height: fit-content;
+}
+
+body::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  min-height: 100%;
+  background: linear-gradient(var(--gradient-top), var(--gradient-bottom))
+    no-repeat center center fixed;
+  background-size: cover;
+  z-index: -1;
+}
+
+header {
+  display: flex;
+  font-size: 2rem;
+  grid-column: 1/4;
+  grid-row: 1/2;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 1px solid red;
+  box-shadow: 0 7px 7px -10px rgba(0, 0, 0, 0.99);
+  height: 5rem;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  cursor: default;
+  height: 100%;
+  margin-right: 2rem;
+}
+
+#logo {
+  cursor: pointer;
+}
+
+#logo img {
+  width: 11.2rem;
+  height: 4rem;
+  margin-left: 2rem;
+}
+
+.menu-list {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+  height: 100%;
+}
+
+.menu-list li {
+  cursor: pointer;
+}
+
+.standings-wrapper {
+  position: relative;
+  width: 15%;
+  min-width: fit-content;
+  height: 100%;
+}
+.standings-btn {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  transition: color, transform 0.3s;
+}
+
+.standings-dropdown-wrapper {
+  display: none;
+  width: 100%;
+}
+
+.standings-wrapper:hover .standings-btn {
+  transform: scale(1.05);
+  color: red;
+}
+
+.standings-wrapper:hover .standings-dropdown-wrapper {
+  position: absolute;
+  display: block;
+  background-color: transparent;
+  left: 0;
+  top: calc(100% - 1rem);
+  padding-top: 1rem;
+}
+
+.dropdown-btn {
+  position: relative;
+  background-color: transparent;
+  animation: fadeInDown 0.5s ease-out;
+  overflow: hidden;
+  min-width: fit-content;
+  transition: color 0.3s;
+}
+
+.dropdown-btn:hover {
+  color: red;
+}
+
+.standings-constructors {
+  animation: fadeInDown 0.5s ease-out;
+}
+
+.tracks-btn {
+  transition: color, transform 0.3s;
+}
+
+.tracks-btn:hover {
+  color: red;
+  transform: scale(1.05);
+}
+
+main {
+  grid-column: 1/4;
+  grid-row: 2/3;
+  margin-top: 7vh;
+  height: 70vh;
+  /* overflow: hidden; */
+}
+
+.display {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+}
+
+footer {
+  font-weight: 200;
+  display: flex;
+  grid-column: 1/4;
+  grid-row: 3/4;
+  width: 100%;
+  height: 100%;
+  font-size: 3rem;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+/* -------------------------------------- Modal ------------------------------------------- */
+.modal-container {
+  position: absolute;
+  z-index: 5;
+  background-color: #e0e0e0f5;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background-color: var(--light-grey);
+  width: 40vw;
+  height: 35vh;
+  min-width: 25rem;
+  min-height: 20rem;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  border-radius: 10px;
+  background: #e0e0e0;
+  box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+}
+
+.modal-title {
+  font-size: 2rem;
+  font-weight: 200;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.modal-info {
+  font-size: 1.5rem;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.modal-btn {
+  position: relative;
+  color: white;
+  background-color: red;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.1s;
+}
+
+.modal-btn:hover {
+  transform: translateY(-1px);
+}
+
+.modal-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.2);
+
+}
+
+/* -------------------------------------- LastRaceInfo ------------------------------------------- */
+
+.lr-standings {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  align-items: center;
+  animation: fadeInDown 0.5s;
+  min-width: 71rem;
+  overflow-y: auto;
+}
+
+.lr-title {
+  font-size: 3rem;
+  font-weight: 200;
+  margin-bottom: 1rem;
+  animation: fadeInDown 0.5s;
+}
+
+.lr-round-number {
+  font-weight: bold;
+  font-size: 1.6rem;
+  animation: fadeInDown 0.5s;
+}
+.lr-gp-name {
+  display: flex;
+  width: 60%;
+  font-size: 2rem;
+  font-weight: 600;
+  justify-content: center;
+  animation: fadeInDown 0.5s;
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.lr-header {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text);
+  font-size: 1.7rem;
+  font-weight: 500;
+  transition: all 0.5s;
+  cursor: default;
+  width: 100%;
+  background-color: var(--light-grey);
+  /* border-bottom: 1px solid var(--border-color); */
+  border-right: 1px solid var(--border-color);
+}
+
+.lr-driver-item {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text);
+  font-size: 1.6rem;
+  transition: all 0.5s;
+  cursor: default;
+  width: 100%;
+  border-bottom: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+}
+
+.lr-pos {
+  width: 15%;
+  text-align: center;
+}
+.lr-name {
+  display: flex;
+  min-width: 20rem;
+  width: 20%;
+}
+.lr-car-number {
+  width: 15%;
+  text-align: center;
+}
+.lr-team {
+  width: 25%;
+}
+.lr-status {
+  width: 15%;
+}
+.lr-points {
+  width: 10%;
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------------------------------------- */
+
+/* -------------------------------------- DRIVERS STANDINGS ------------------------------------------- */
+.standings-title {
+  font-size: 3rem;
+  font-weight: 200;
+  margin-bottom: 1rem;
+}
+
+.standings-info {
+  width: 55%;
+  min-width: 45rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 2rem;
+  padding: 0 1rem;
+  height: 7%;
+}
+
+.standings-list {
+  width: 70%;
+  min-width: 71rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  align-items: center;
+  animation: fadeInDown 0.5s;
+  overflow-y: auto;
+}
+
+.standings-header {
+  display: flex;
+  justify-content: space-around;
+  color: var(--text);
+  font-size: 1.7rem;
+  font-weight: 500;
+  transition: all 0.5s;
+  cursor: default;
+  width: 80%;
+  background-color: var(--light-grey);
+  /* border-bottom: 1px solid var(--border-color); */
+  border-right: 1px solid var(--border-color);
+  /* position: fixed; */
+}
+
+.standings-header div {
+  display: flex;
+}
+
+.standings-header__pos {
+  justify-content: center;
+  width: 20%;
+}
+.standings-header__name {
+  width: 40%;
+}
+
+.standings-header__points {
+  justify-content: center;
+  width: 20%;
+}
+
+.driver-item {
+  display: flex;
+  justify-content: space-around;
+  color: var(--text);
+  font-size: 1.6rem;
+  transition: all 0.5s;
+  cursor: default;
+  width: 80%;
+  border-bottom: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+}
+
+.driver-item div {
+  display: flex;
+}
+
+.driver-item__pos {
+  justify-content: center;
+  width: 20%;
+}
+.driver-item__name {
+  width: 40%;
+}
+
+.driver-item__points {
+  justify-content: center;
+  width: 20%;
+}
+
+/* --------------------------------------------------------------------------------------------------------- */
+/* -------------------------------------- CONSTRUCTORS STANDINGS ------------------------------------------- */
+
+.constructors-title {
+  font-size: 3rem;
+  font-weight: 200;
+  margin-bottom: 1rem;
+}
+
+.cStandings-info {
+  width: 55%;
+  min-width: 45rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 2rem;
+  padding: 0 1rem;
+  height: 7%;
+}
+
+.cStandings-list {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  align-items: center;
+  animation: fadeInDown 0.5s;
+  overflow-y: auto;
+  min-width: 61rem;
+}
+
+.constructors-header {
+  display: flex;
+  justify-content: space-around;
+  color: var(--text);
+  font-size: 1.7rem;
+  font-weight: 500;
+  transition: all 0.5s;
+  cursor: default;
+  width: 100%;
+  background-color: var(--light-grey);
+  border-right: 1px solid var(--border-color);
+}
+
+.constructor-item {
+  display: flex;
+  justify-content: space-around;
+  color: var(--text);
+  font-size: 1.6rem;
+  transition: all 0.5s;
+  cursor: default;
+  width: 100%;
+  border-bottom: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+}
+
+.cPos {
+  width: 20%;
+  text-align: center;
+}
+
+.cName {
+  width: 30%;
+}
+.cNationality {
+  width: 25%;
+}
+
+.cPoints {
+  width: 15%;
+}
+
+.cWins {
+  width: 10%;
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------------------------------------- */
+
+/* -------------------------------------- CALENDAR ------------------------------------------- */
+.calendar-title {
+  font-size: 3rem;
+  font-weight: 200;
+  margin-bottom: 1rem;
+}
+
+.calendar-display {
+  display: flex;
+  position: relative;
+  width: 85%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text);
+  font-size: 1.7rem;
+  font-weight: 500;
+  transition: all 0.5s;
+  cursor: default;
+  width: 100%;
+  background-color: var(--light-grey);
+  border-right: 1px solid var(--border-color);
+}
+
+.calendar-header__round {
+  display: flex;
+  width: 10%;
+  justify-content: center;
+}
+.calendar-header__name {
+  width: 35%;
+}
+.calendar-header__country {
+  width: 20%;
+}
+.calendar-header__date {
+  width: 17%;
+}
+.calendar-header__info {
+  width: 25%;
+  text-align: center;
+}
+
+.calendar-list {
+  display: flex;
+  width: 100%;
+  height: 95%;
+  flex-direction: column;
+  padding: rem 0;
+  border-radius: 5px;
+  align-items: center;
+  overflow-y: auto;
+  animation: fadeInDown 0.5s;
+}
+
+.calendar-controls {
+  font-size: 1.5rem;
+  display: flex;
+  width: 80%;
+  margin-top: 1rem;
+  justify-content: space-between;
+}
+
+.btn {
+  background-color: transparent;
+  color: var(--text);
+  border: 1px solid red;
+  width: 15%;
+  border-radius: 3px;
+}
+
+.btn:hover {
+  background-color: red;
+  color: white;
+}
+.btn:active {
+  transform: translateY(1px);
+}
+
+.race-item {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text);
+  font-size: 1.6rem;
+  transition: all 0.5s;
+  cursor: default;
+  width: 100%;
+  border-bottom: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+}
+
+.race-item div {
+  display: flex;
+}
+
+.race-name {
+  width: 35%;
+}
+
+.race-round {
+  width: 10%;
+  justify-content: center;
+}
+
+.race-country {
+  width: 20%;
+}
+
+.race-date {
+  width: 17%;
+}
+
+.race-info {
+  width: 25%;
+  text-decoration: none;
+  text-align: center;
+}
+
+.race-info,
+.race-info:visited {
+  color: red;
+}
+
+/* -------------------------------------- Drivers Details ------------------------------------------------- */
+.drivers-list-title {
+  font-size: 3rem;
+  font-weight: 200;
+  margin-bottom: 3rem;
+  animation: fadeInDown 0.5s;
+}
+
+.drivers-list {
+  display: grid;
+  grid-template-rows: repeat(auto-fill, 10rem);
+  grid-template-columns: repeat(auto-fill, 25rem);
+  width: 90%;
+  justify-content: center;
+  animation: fadeInDown 0.5s;
+  overflow-y: auto;
+}
+
+.dl-driver-item {
+  display: flex;
+  padding: 0.1rem 0;
+  justify-content: space-around;
+  align-items: center;
+  width: 90%;
+  min-width: 20rem;
+  height: 90%;
+  cursor: pointer;
+  margin: 1rem 0;
+  border-bottom: 2px solid var(--border-color);
+  border-right: 2px solid var(--border-color);
+  border-radius: 5px;
+  transition: border 0.3s;
+}
+
+.dl-driver-item:hover {
+  border-bottom: 2px solid red;
+  border-right: 2px solid red;
+}
+
+.dl-driver-item__helmet {
+  width: auto;
+  height: auto;
+  max-width: 9rem;
+  max-height: 6rem;
+}
+.dl-driver-item__name-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 50%;
+}
+
+.dl-driver-item__name {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.5rem;
+  font-weight: 500;
+  width: 90%;
+}
+.dl-driver-item__given-name {
+  align-self: flex-start;
+}
+.dl-driver-item__family-name {
+  align-self: center;
+}
+
+.dl-driver-item__number {
+  width: 50%;
+  font-size: 2rem;
+  font-family: "Saira Stencil One", cursive;
+  text-align: end;
+}
+
+/* -------------------------------------- Drivers Details ------------------------------------------------- */
+.driver-profile__title {
+  font-size: 3rem;
+  font-weight: 200;
+  margin-bottom: 0.5rem;
+  animation: fadeInDown 0.5s;
+}
+
+.driver-profile__dob {
+  font-size: 1.7rem;
+  font-weight: 500;
+  margin: 0.5rem 0;
+}
+
+.driver-profile__nationality {
+  font-size: 1.7rem;
+  font-weight: 500;
+  margin: 1rem 0;
+}
+
+.driver-profile-container {
+  display: flex;
+  justify-content: space-around;
+  width: 60%;
+}
+
+.driver-profile__photo {
+  height: auto;
+  /* border-radius: 50%; */
+  border: 3px solid red;
+  width: auto;
+  max-height: 30rem;
+  max-width: 30rem;
+}
+
+.driver-profile-info-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 50%;
+  min-width: 20rem;
+  font-size: 1.5rem;
+}
+
+.profile-item {
+  text-align: center;
+  border-bottom: 1px solid red;
+  border-right: 1px solid red;
+}
+
+/* ---------------------------           ANIMATIONS            ------------------------------- */
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-1rem);
+  }
+  50% {
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------------------------           MEDIA QUERIES            ------------------------------- */
+
+@media screen and (max-height: 70rem) {
+  footer {
+    height: fit-content;
+    font-size: 1.5rem;
+  }
+}
